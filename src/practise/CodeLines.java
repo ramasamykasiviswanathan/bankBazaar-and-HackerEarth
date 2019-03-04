@@ -19,7 +19,7 @@ public class CodeLines {
 
 	public long calculateCodeLines(String path) throws Exception {
 		Path paths = Paths.get(path);
-		long count = Files.walk(paths).filter(Files::isReadable).filter(((Predicate<Path>)Files::isDirectory).negate()).map(t -> {
+		long count = Files.walk(paths).parallel().filter(Files::isReadable).filter(((Predicate<Path>)Files::isDirectory).negate()).map(t -> {
 			Optional<List<String>> optional = Optional.empty();
 			System.out.println(t.toString());
 			try {
